@@ -1,4 +1,5 @@
 ﻿using ChekhovsUtil.serialization;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
 using TalosSoccer.Core.Models;
@@ -9,6 +10,22 @@ namespace TalosSoccer.Core.Containers
     {
         public string Name { get; private set; }
         public Player[] Players { get; private set; }
+
+        public void Update(float elapsedMs)
+        {
+            foreach (Player player in Players)
+            {
+                player.Update(elapsedMs);
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Player player in Players)
+            {
+                player.Draw(spriteBatch);
+            }
+        }
 
         public void Deserialize(BinaryReader reader)
         {

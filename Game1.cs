@@ -10,14 +10,19 @@ namespace TalosSoccer
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
         public static ResourceCache ResourceCache { get; private set; }
+        public static int ScreenWidth { get; private set; }
+        public static int ScreenHeight { get; private set; }
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _graphics.PreferredBackBufferWidth = 1080;
+            _graphics.PreferredBackBufferHeight = 720;
+            ScreenHeight = 1080;
+            ScreenWidth = 720;
         }
 
         protected override void Initialize()
@@ -34,6 +39,8 @@ namespace TalosSoccer
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            ResourceCache.LoadTexture("field", "Misc/field");
+            ResourceCache.LoadTexture("ball", "Misc/ball");
         }
 
         protected override void Update(GameTime gameTime)

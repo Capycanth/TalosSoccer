@@ -5,30 +5,29 @@ namespace TalosSoccer.Core.Models
 {
     public abstract class Circle
     {
-        public Texture2D Texture { get; private set; }
-        public Rectangle Rectangle { get; protected set; }
-        public int Radius { get; private set; }
-        public Point CenterPoint
-        {
-            get
-            {
-                return new Point(this.Rectangle.X + Radius, this.Rectangle.Y + Radius);
-            }
-        }
+        public Vector2 Position { get; set; }
         public Vector2 Velocity { get; set; }
+        protected float Radius { get; private set; }
+        protected Texture2D Texture { get; private set; }
+        protected Vector2 CenterPoint { get { return Position + CenterOffset; } }
+        private Vector2 CenterOffset { get; set; }
 
-        public Circle(Texture2D texture, Rectangle rectangle)
+        public Circle(float initialRadius, Texture2D circleTexture)
         {
-            this.Texture = texture;
-            this.Rectangle = rectangle;
-            this.Radius = rectangle.Width >> 1;
+            Radius = initialRadius;
+            Texture = circleTexture;
+            CenterOffset = new Vector2(initialRadius, initialRadius);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Update(float elapsedMs)
         {
-            spriteBatch.Draw(this.Texture, this.Rectangle, Color.White);
+            Position += Velocity * elapsedMs;
         }
 
-        public abstract void Update(float elapsedMs);
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Texture, Position, Color.White);
+        }
     }
+
 }

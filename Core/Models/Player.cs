@@ -3,28 +3,31 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
+using TalosSoccer.Core.enumeration;
 
 namespace TalosSoccer.Core.Models
 {
     public class Player : Circle, IBinary
     {
-        public Player(Texture2D texture, Rectangle rectangle) : base(texture, rectangle)
+        public PlayerPosition PlayerPosition { get; private set; }
+        public Player(Texture2D circleTexture, PlayerPosition playerPosition) : base(32, circleTexture)
         {
+            PlayerPosition = playerPosition;
         }
 
         public override void Update(float elapsedMs)
         {
-            throw new NotImplementedException();
+            base.Update(elapsedMs);
         }
 
         public void Deserialize(BinaryReader reader)
         {
-            throw new NotImplementedException();
+            PlayerPosition = (PlayerPosition)reader.ReadByte();
         }
 
         public void Serialize(BinaryWriter writer)
         {
-            throw new NotImplementedException();
+            writer.Write((byte)PlayerPosition);
         }
     }
 }

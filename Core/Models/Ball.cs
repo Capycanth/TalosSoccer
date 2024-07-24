@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace TalosSoccer.Core.Models
 {
@@ -14,18 +15,18 @@ namespace TalosSoccer.Core.Models
         public BallState CurrentState { get; set; }
         private readonly float FRICTION = 0.97f;
 
-        public Ball(Texture2D texture, Rectangle rectangle) : base(texture, rectangle)
+        public Ball(Texture2D circleTexture) : base(16, circleTexture)
         {
-            this.CurrentState = BallState.FREE;
+            CurrentState = BallState.FREE;
         }
 
         public override void Update(float elapsedMs)
         {
-            Rectangle rectangle = this.Rectangle;
-            this.Velocity *= this.FRICTION;
-            rectangle.X *= (int)(this.Velocity.X * elapsedMs);
-            rectangle.Y *= (int)(this.Velocity.Y * elapsedMs);
-            this.Rectangle = rectangle;
+            // Apply friction to the velocity
+            Velocity *= FRICTION;
+
+            // Call the base update method to move the ball
+            base.Update(elapsedMs);
         }
     }
 }

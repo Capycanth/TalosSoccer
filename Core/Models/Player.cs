@@ -1,7 +1,5 @@
 ﻿using ChekhovsUtil.serialization;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.IO;
 using TalosSoccer.Core.enumeration;
 

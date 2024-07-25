@@ -13,12 +13,14 @@ namespace TalosSoccer.Core.Containers
         private Texture2D Field { get; set; }
         private Rectangle Rectangle { get; set; }
 
+        public bool IsMatchOver { get; private set; }
+
         public Match(Team awayTeam, Team homeTeam)
         {
             HomeTeam = homeTeam;
             AwayTeam = awayTeam;
             Field = Game1.ResourceCache.GetTexture("field");
-            Rectangle = new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight);
+            Rectangle = new Rectangle(0, 0, 1280, 720);
         }
 
         public void Update(float elapsedMS)
